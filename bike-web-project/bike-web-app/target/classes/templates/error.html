@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>发生错误啦！</title>
+</head>
+<body>
+    <h1>
+        <span th:text="${status}"></span>
+        糟糕，既然跑到这个页面来了！
+    </h1>
+    <span th:text="${timestamp}"></span>
+    <span th:text="${status}"></span>
+    <span th:text="${error}"></span>
+    <span th:text="${exception}"></span>
+    <span th:text="${message}"></span>
+    <span th:text="${errors}"></span>
+</body>
+</html>

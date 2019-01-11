@@ -1,0 +1,82 @@
+#Server配置
+server:
+  port: 8080
+  servlet:
+    context-path: /
+  error:
+    path: /error
+
+spring:
+  #Spring数据源配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/bike?characterEncoding=utf-8&serverTimezone=UTC&useSSL=false
+    username: root
+    password: root
+    #数据库连接池配置
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      #初始化连接池连接数，最小、最大活跃连接数
+      initial-size: 5
+      min-idle: 5
+      max-active: 10
+      #获取连接池等待时间ms
+      max-wait: 2000
+      filters: stat,wall
+      # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+      connection-properties: druid.stat.mergeSql\=true;druid.stat.slowSqlMillis\=5000
+      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接
+      time-between-eviction-runs-millis: 600000
+      # 配置一个连接在池中最小生存的时间
+      min-evictable-idle-time-millis: 300000
+      # 打开PSCache，并且指定每个连接上PSCache的大小
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      #是否在连接空闲一段时间后检测其可用性
+      test-while-idle: true
+      #是否在获得连接后检测其可用性
+      test-on-borrow: false
+      #是否在连接放回连接池后检测其可用性
+      test-on-return: false
+
+#    dbcp2连接池，需要导入commons-dbcp2包
+#    dbcp2:
+#      #初始化连接池连接数
+#      initial-size: 5
+#      #连接池最小活跃连接数
+#      min-idle: 5
+#      #连接池最大空闲连接数
+#      max-idle: 5
+#      #连接池最大连接数
+#      max-total: 10
+#      #获取连接池等待时间ms
+#      max-wait-millis: 500
+
+  #热部署是否启动，默认true
+  devtools:
+    livereload:
+      port: 35728
+      enabled: true
+    restart:
+      enabled: true
+
+  #Redis配置
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    timeout: 10000ms
+    password:
+    jedis:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 0
+        max-wait: -1ms
+  thymeleaf:
+    cache: false
+
+#Mybatis配置
+mybatis:
+  config-location: classpath:/spring-mybatis.xml
+  mapper-locations: classpath*:/mapper/*Mapper.xml
+
